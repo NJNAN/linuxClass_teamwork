@@ -1,0 +1,17 @@
+=== 双向交流软件使用指南 ===
+
+1. 编译程序：
+   gcc -g -Wall -pthread -o server server.c
+   gcc -g -Wall -pthread -o client client.c
+
+2. 启动服务器（终端1）：
+   ./server
+
+3. 启动客户端（终端2）：
+   ./client 127.0.0.1
+
+4. 功能特点：
+   ✓ TCP Socket网络通信
+   ✓ 多线程双向通信
+   ✓ 支持多客户端聊天
+   ✓ 实时消息广播
