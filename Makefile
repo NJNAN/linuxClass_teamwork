@@ -1,22 +1,41 @@
+# Makefile for Chat Application
+
 CC = gcc
-CFLAGS = -g -Wall -pthread
-SERVER = server
-CLIENT = client
+CFLAGS = -Wall -Wextra -pthread -g
+TARGET_SERVER = chat_server
+TARGET_CLIENT = chat_client
+SOURCE_SERVER = chat_server.c
+SOURCE_CLIENT = chat_client.c
 
-all: $(SERVER) $(CLIENT)
+.PHONY: all clean server client run-server run-client
 
-$(SERVER): server.c
-$(CC) $(CFLAGS) -o $(SERVER) server.c
+all: $(TARGET_SERVER) $(TARGET_CLIENT)
 
-$(CLIENT): client.c
-$(CC) $(CFLAGS) -o $(CLIENT) client.c
+server: $(TARGET_SERVER)
+
+client: $(TARGET_CLIENT)
+
+$(TARGET_SERVER): $(SOURCE_SERVER)
+	$(CC) $(CFLAGS) -o $(TARGET_SERVER) $(SOURCE_SERVER)
+
+$(TARGET_CLIENT): $(SOURCE_CLIENT)
+	$(CC) $(CFLAGS) -o $(TARGET_CLIENT) $(SOURCE_CLIENT)
+
+run-server: $(TARGET_SERVER)
+	./$(TARGET_SERVER)
+
+run-client: $(TARGET_CLIENT)
+	./$(TARGET_CLIENT)
 
 clean:
-rm -f $(SERVER) $(CLIENT) *.o
+	rm -f $(TARGET_SERVER) $(TARGET_CLIENT) users.dat *.o
 
-test: all
-@echo "编译完成！"
-@echo "服务器: $(SERVER)"
-@echo "客户端: $(CLIENT)"
-
-.PHONY: all clean test
+help:
+	@echo "可用的命令:"
+	@echo "  make all        - 编译服务端和客户端"
+	@echo "  make server     - 只编译服务端"
+	@echo "  make client     - 只编译客户端"
+	@echo "  make run-server - 编译并运行服务端"
+	@echo "  make run-client - 编译并运行客户端"
+	@echo "  make clean      - 清理编译文件"
+	@echo "  make help       - 显示此帮助信息"

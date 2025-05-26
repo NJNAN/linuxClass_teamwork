@@ -1,62 +1,38 @@
 #!/bin/bash
 
-clear
-echo "========================================================"
-echo "    Linux编程实训 - 双向交流软件项目演示"
-echo "========================================================"
-echo ""
-echo "项目作者: 团队作业"
-echo "完成时间: $(date '+%Y年%m月%d日')"
+echo "=================================="
+echo "  聊天室系统 - 最终演示"
+echo "=================================="
 echo ""
 echo "🎯 项目特色功能："
-echo "  ✅ TCP Socket网络通信"
-echo "  ✅ 多线程并发处理"
-echo "  ✅ 时间戳显示功能"
-echo "  ✅ 聊天界面左右分布（类似微信）"
-echo "  ✅ 彩色消息显示"
+echo "  ✅ 用户注册和登录认证"
 echo "  ✅ 多客户端实时聊天"
-echo ""
-echo "📁 项目文件："
-echo "  - server.c      (服务器端代码)"
-echo "  - client.c      (客户端代码)"
-echo "  - Makefile      (编译配置)"
-echo "  - README.md     (项目说明)"
-echo "  - 使用指南.md   (详细使用指南)"
-echo "  - 项目总结.md   (项目总结报告)"
-echo ""
-echo "🔧 编译状态："
-if [ -f "server" ] && [ -f "client" ]; then
-    echo "  ✅ 服务器和客户端已编译完成"
-else
-    echo "  🔄 正在编译程序..."
-    make clean >/dev/null 2>&1
-    gcc -g -Wall -pthread -o server server.c 2>/dev/null
-    gcc -g -Wall -pthread -o client client.c 2>/dev/null
-    if [ -f "server" ] && [ -f "client" ]; then
-        echo "  ✅ 编译成功！"
-    else
-        echo "  ❌ 编译失败，请检查代码"
-        exit 1
-    fi
-fi
+echo "  ✅ 正确的消息格式显示："
+echo "      - 自己的消息: [时间] 本人: 消息内容"
+echo "      - 他人的消息: [时间] 用户名: 消息内容"
+echo "  ✅ 统一的输入提示符: 请输入消息>>"
+echo "  ✅ 消息历史记录功能"
+echo "  ✅ 自动换行功能"
+echo "  ✅ 命令行参数指定服务器IP"
 echo ""
 echo "🚀 演示说明："
-echo "  1. 当前终端将启动服务器"
-echo "  2. 请打开新终端，运行: ./client 127.0.0.1"
-echo "  3. 可以打开多个客户端进行聊天测试"
-echo "  4. 观察时间戳和左右分布的消息布局"
-echo "  5. 输入 'exit' 或按 Ctrl+C 退出"
+echo "1. 当前终端将启动服务器"
+echo "2. 请打开新终端运行以下命令之一:"
+echo "   - ./chat_client              # 连接到本地服务器"
+echo "   - ./chat_client 192.168.1.x  # 连接到指定IP"
+echo "   - ./start_client.sh          # 使用便捷启动脚本"
+echo "3. 使用默认管理员账户登录: admin/Admin123"
+echo "4. 或者注册新用户测试完整功能"
+echo "5. 开启多个客户端测试多用户聊天"
 echo ""
-echo "💡 界面效果预览："
-echo "  我 [17:15:25] 大家好！"
-echo "                              [17:15:30] 张三: 你好，欢迎！"
+echo "📝 验证要点："
+echo "- 查看自己的消息是否显示为 '[时间] 本人: 消息内容'"
+echo "- 查看输入提示符是否为 '请输入消息>>'"
+echo "- 测试消息历史记录功能"
+echo "- 测试用户进入/离开提示"
+echo "- 测试命令行IP参数功能"
 echo ""
-echo "========================================================"
-echo "按任意键启动服务器..."
-read -n 1 -s
-echo ""
-echo "🌟 正在启动聊天服务器..."
-echo "========================================================"
+echo "正在启动服务器..."
+echo "=================================="
 
-# 启动服务器
-./server
+./chat_server
